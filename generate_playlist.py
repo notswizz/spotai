@@ -1,19 +1,17 @@
 import openai
-import re
+import os
+
+openai.api_key = os.environ["OPENAI_API_KEY"]
 
 def generate_playlist(prompt):
-    openai.api_key = "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"
-
     response = openai.Completion.create(
-        engine="text-davinci-003",
-        prompt=f"Generate a playlist of 13 songs based on the following theme: {prompt}",
-        max_tokens=260,
-        n=1,
-        stop=None,
+        engine="text-davinci-002",
+        prompt=f"generate 13 songs that follow the prompt: {prompt}",
         temperature=0.7,
+        max_tokens=100,
+        top_p=1,
+        frequency_penalty=0,
+        presence_penalty=0,
     )
 
-    raw_playlist = response.choices[0].text.strip().split("\n")
-    playlist = [re.sub(r'^\d+\.\s', '', song) for song in raw_playlist]
-    return playlist
-
+    return response.choices[0].text.strip().split("\n")
