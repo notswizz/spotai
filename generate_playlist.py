@@ -2,7 +2,7 @@ import openai
 import re
 
 def generate_playlist(prompt):
-    openai.api_key = "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"
+    openai.api_key = "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"
 
     response = openai.Completion.create(
         engine="text-davinci-003",
