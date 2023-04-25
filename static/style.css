@@ -40,6 +40,10 @@ textarea::placeholder {
     color: #b3b3b3;
 }
 
+.btn-container {
+    display: flex;
+    justify-content: center;
+}
 
 button {
     background-color: #1db954;
@@ -109,7 +113,16 @@ button:hover {
     color: #fff;
   }
   
-
+  .btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease-in-out;
+    margin: 0 0.5rem;
+}
 
 .btn-green {
     background-color: #1db954;
@@ -131,7 +144,11 @@ button:hover {
     background-color: #44b2ff;
 }
 
-
+.green-outline {
+    border: 5px solid #1db954;
+    border-radius: 6px;
+    padding: 0.5rem;
+}
 
 textarea {
     padding: 0.25rem;
@@ -143,7 +160,12 @@ textarea {
     width: 250px;
 }
 
-.button-container {
+.index-button-container {
+    display: flex;
+    justify-content: center;
+}
+
+.result-button-container {
     display: flex;
     justify-content: center;
     align-items: center;
