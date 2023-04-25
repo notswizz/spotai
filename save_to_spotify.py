@@ -5,7 +5,7 @@ from spotipy.oauth2 import SpotifyOAuth
 # Using the environment variable names you've provided
 CLIENT_ID = os.environ.get('CLIENT_ID')
 CLIENT_SECRET = os.environ.get('SECRET_ID')
-REDIRECT_URI = os.environ.get('KEY')
+REDIRECT_URI = os.environ.get('SPOTIPY_REDIRECT_URL')
 
 sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=CLIENT_ID,
                                                client_secret=CLIENT_SECRET,
