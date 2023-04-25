@@ -4,16 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Playlist Generator</title>
+    <title>spotai</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="container">
-        <h1>playlist generator</h1>
+        <h1>spotai</h1>
         <form action="/result" method="post">
             <div class="input-container">
-                <label for="prompt">enter a prompt:</label>
-                <textarea name="prompt" id="prompt" rows="1" placeholder="e.g. chill songs for working at home"></textarea>
+                <textarea name="prompt" id="prompt" rows="2" placeholder="prompt"></textarea>
                 <button>generate playlist</button>
             </div>
         </form>
