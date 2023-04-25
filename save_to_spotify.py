@@ -10,11 +10,14 @@ auth_manager = SpotifyOAuth(client_id=SPOTIPY_CLIENT_ID, client_secret=SPOTIPY_C
 sp = spotipy.Spotify(auth_manager=auth_manager)
 
 def get_track_uris(track_names, access_token):
-    sp = spotipy.Spotipy(auth=access_token)
+    sp = spotipy.Spotify(auth=access_token)
     track_uris = []
     for track_name in track_names:
         results = sp.search(q=track_name, limit=1, type="track")
-        track_uris.append(results['tracks']['items'][0]['uri'])
+        if results['tracks']['items']:
+            track_uris.append(results['tracks']['items'][0]['uri'])
+        else:
+            print(f"No results found for '{track_name}', skipping.")
     return track_uris
 
 def save_playlist_to_spotify(playlist_name, track_uris):

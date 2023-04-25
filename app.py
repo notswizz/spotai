@@ -16,14 +16,13 @@ sp = spotipy.Spotify(auth_manager=auth_manager)
 
 @app.route("/login")
 def login():
-    auth_url = sp_oauth.get_authorize_url()
+    auth_url = auth_manager.get_authorize_url()
     return redirect(auth_url)
-
 
 @app.route("/callback")
 def callback():
     code = request.args.get("code")
-    token_info = sp_oauth.get_access_token(code)
+    token_info = auth_manager.get_access_token(code)
     access_token = token_info["access_token"]
     session["access_token"] = access_token
     return redirect(url_for("index"))
@@ -34,7 +33,8 @@ def index():
         user_input = request.form['user_input']
         track_names = generate_playlist(user_input)
         if track_names:
-            playlist_url = save_to_spotify(track_names)
+            track_uris = get_track_uris(track_names, session["access_token"])
+            playlist_url = save_playlist_to_spotify(user_input, track_uris)
             return render_template('result.html', playlist_url=playlist_url)
         else:
             error = "Unable to generate a playlist. Please try again."
