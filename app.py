@@ -1,7 +1,7 @@
 import os
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
-from flask import Flask, request, render_template, redirect, url_for
+from flask import Flask, request, render_template, redirect, url_for, session
 from generate_playlist import generate_playlist
 from save_to_spotify import save_playlist_to_spotify, get_track_uris
 
