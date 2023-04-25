@@ -153,3 +153,9 @@ button:hover {
 .btn-blue:hover {
     background-color: #44b2ff;
 }
+
+.green-outline {
+    border: 2px solid #1db954;
+    border-radius: 12px;
+    padding: 1rem;
+}
