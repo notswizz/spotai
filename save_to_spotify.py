@@ -1,7 +1,7 @@
-import os
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
-
+from credentials import *
+from cache_handler import CustomCacheHandler
 
 redirect_uri = "https://spotai.herokuapp.com/"
 
