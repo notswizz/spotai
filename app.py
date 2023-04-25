@@ -47,6 +47,7 @@ def index():
     return render_template('index.html')
 
 
+
 @app.route('/result')
 def result():
     playlist_url = request.args.get('playlist_url', None)

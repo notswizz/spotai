@@ -1,29 +1,18 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="utf-8">
     <title>Playlist Generator</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-    <a href="{{ url_for('login') }}" class="login-button">Log in with Spotify</a>
-
-    <form action="/" method="post">
-        <div class="input-container">
-            <textarea id="user_input" name="user_input" required placeholder="prompt" rows="4" cols="50"></textarea>
-            <br>
-            <input type="text" id="playlist_name" name="playlist_name" required placeholder="Playlist name">
-            <br>
-            <button type="submit">Generate playlist</button>
-        </div>
-    </form>
-    {% if playlist_url %}
-    <p>Your playlist has been created! Check it out <a href="{{ playlist_url }}" target="_blank">here</a>.</p>
+  </head>
+  <body>
+    <h1>Playlist Generator</h1>
+    {% if error %}
+      <p>{{ error }}</p>
     {% endif %}
-    <footer>
-        <p>built with <span class="heart">&hearts;</span> by <a href="YOUR_GITHUB_LINK_HERE" target="_blank">jack</a></p>
-    </footer>
-    
-</body>
+    <form action="/" method="post">
+      <label for="user_input">Enter your favorite artist, genre, or keyword:</label>
+      <input type="text" id="user_input" name="user_input" required>
+      <button type="submit">Generate Playlist</button>
+    </form>
+  </body>
 </html>
