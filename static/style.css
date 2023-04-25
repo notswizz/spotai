@@ -2,40 +2,40 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-  }
-  
-  body {
+}
+
+body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     background-color: #191414;
     color: #fff;
-  }
-  
-  h1 {
+}
+
+h1 {
     font-size: 2rem;
     font-weight: bold;
     text-align: center;
     margin-top: 2rem;
     margin-bottom: 2rem;
-  }
-  
-  form {
+}
+
+form {
     margin-top: 2rem;
-  }
-  
-  .input-container {
+}
+
+.input-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
-  }
-  
-  label {
+}
+
+label {
     font-size: 1.2rem;
     margin-bottom: 1rem;
-  }
-  
-  input {
+}
+
+textarea {
     padding: 0.5rem;
     font-size: 1rem;
     border-radius: 12px;
@@ -44,13 +44,18 @@
     margin-bottom: 1rem;
     width: 100%;
     max-width: 500px;
-  }
-  
-  input::placeholder {
+}
+
+textarea::placeholder {
     color: #b3b3b3;
-  }
-  
-  button {
+}
+
+.btn-container {
+    display: flex;
+    justify-content: center;
+}
+
+button {
     background-color: #1db954;
     color: #fff;
     font-size: 1rem;
@@ -62,32 +67,31 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s ease-in-out;
     width: 100%;
-    max-width: 500px;
+    max-width: 250px;
     margin-bottom: 1rem;
-  }
-  
-  button:hover {
+}
+
+button:hover {
     background-color: #1ed760;
-  }
-  
-  .result-container {
+}
+
+.result-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 2rem;
-  }
-  
-  .result-text {
+}
+
+.result-text {
     font-size: 1.2rem;
     margin-bottom: 1rem;
-  }
-  
-  .result-link {
+}
+
+.result-link {
     color: #1db954;
     font-weight: bold;
     text-decoration: none;
-    transition: color 0.3s ease-in-out;
-  }
+}
   
   .result-link:hover {
     color: #1ed760;
