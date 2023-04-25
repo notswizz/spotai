@@ -16,14 +16,6 @@ def index():
 
     return render_template('index.html')
 
-if __name__ == '__main__':
-    app.run(debug=True, port=int(os.environ.get('PORT', 8080)))
-
-
-
-
-
-
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -40,5 +32,6 @@ def index():
 
         # Render the template with the Spotify URL
         return render_template('index.html', playlist_url=playlist_url)
-
- app = Flask(__name__)
+    
+if __name__ == '__main__':
+    app.run(debug=True, port=int(os.environ.get('PORT', 8080)))
