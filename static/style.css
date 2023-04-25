@@ -119,3 +119,33 @@
     color: #fff;
   }
   
+  .btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease-in-out;
+    margin: 0 0.5rem;
+}
+
+.btn-green {
+    background-color: #1db954;
+    color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.btn-green:hover {
+    background-color: #1ed760;
+}
+
+.btn-blue {
+    background-color: #4da7db;
+    color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.btn-blue:hover {
+    background-color: #44b2ff;
+}

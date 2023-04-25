@@ -10,10 +10,10 @@
 <body>
     <div class="container">
         <h1>Playlist created successfully!</h1>
-        <p class="result-text">Your playlist has been generated and is ready to listen to! Click the link below to view your playlist on Spotify:</p>
-        <p class="result-link"><a href="{{ playlist_url }}" target="_blank">{{ playlist_url }}</a></p>
+        <p><a href="{{ playlist_url }}" target="_blank">Click here to view your playlist on Spotify</a></p>
         <div class="button-container">
-            <a href="/" class="btn-open-playlist">Generate another playlist</a>
+            <a href="/" class="btn btn-green">Generate another playlist</a>
+            <a href="{{ playlist_url }}" class="btn btn-blue" target="_blank">View Playlist</a>
         </div>
     </div>
     <footer>
