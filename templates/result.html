@@ -1,12 +1,22 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Result</title>
-  </head>
-  <body>
-    <h1>Playlist created successfully!</h1>
-    <p><a href="{{ playlist_url }}" target="_blank">Click here to view your playlist on Spotify</a></p>
-  </body>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Playlist created successfully!</h1>
+        <p><a href="{{ playlist_url }}" target="_blank">Click here to view your playlist on Spotify</a></p>
+        <div class="button-container">
+            <a href="/" class="btn-open-playlist">Generate another playlist</a>
+        </div>
+    </div>
+    <footer>
+        <p>Made with <span class="heart">&#10084;</span> by Your Name</p>
+    </footer>
+</body>
 </html>

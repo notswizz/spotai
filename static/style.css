@@ -1,141 +1,116 @@
-body {
-    font-family: Arial, sans-serif;
+* {
     margin: 0;
     padding: 0;
-    background-color: #505d6734;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-}
-
-h1 {
-    background-color: #4CAF50;
-    color: white;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-color: #191414;
+    color: #fff;
+  }
+  
+  h1 {
+    font-size: 2rem;
+    font-weight: bold;
     text-align: center;
-    padding: 1rem;
-    margin: 0;
-}
-
-form {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  form {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-label {
-    margin-bottom: 0.5rem;
-}
-
-input {
+    margin-top: 2rem;
+  }
+  
+  label {
+    font-size: 1.2rem;
     margin-bottom: 1rem;
+  }
+  
+  input {
     padding: 0.5rem;
     font-size: 1rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-input::placeholder {
-    color: #999;
-    opacity: 1;
-}
-
-textarea {
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     margin-bottom: 1rem;
-}
-
-button {
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 0.5rem 1rem;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 0.2rem 0;
-    cursor: pointer;
+    width: 100%;
+    max-width: 500px;
+  }
+  
+  input::placeholder {
+    color: #b3b3b3;
+  }
+  
+  button {
+    background-color: #1db954;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
     border-radius: 12px;
-    text-shadow: 1px 1px 2px #000;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
-}
-
-
-button:hover {
-    background-color: #45a049;
-}
-
-a {
-    color: #4CAF50;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-.input-container {
-    border: 2px solid #4CAF50;
-    padding: 1rem;
-    border-radius: 5px;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease-in-out;
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 1rem;
+  }
+  
+  button:hover {
+    background-color: #1ed760;
+  }
+  
+  .result-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     margin-top: 2rem;
-}
-
-
-/* Add these styles to your style.css file */
-
-.button-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.btn-open-playlist, .btn-generate-another {
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 0.5rem 1rem;
-    text-align: center;
+  }
+  
+  .result-text {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .result-link {
+    color: #1db954;
+    font-weight: bold;
     text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 0.5rem 0;
-    cursor: pointer;
-    border-radius: 12px;
-    text-shadow: 1px 1px 2px #000;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
-    width: 80%;
-    text-align: center;
-}
-
-.btn-generate-another {
-    background-color: #2e25249c;
-}
-
-footer {
+    transition: color 0.3s ease-in-out;
+  }
+  
+  .result-link:hover {
+    color: #1ed760;
+  }
+  
+  footer {
     position: absolute;
     bottom: 1rem;
     width: 100%;
     text-align: center;
-}
-
-.footer p {
+  }
+  
+  .footer-text {
     font-size: 0.9rem;
-    color: #333;
-}
-
-.heart {
+    color: #b3b3b3;
+  }
+  
+  .heart {
     color: red;
-}
-
-footer a {
+  }
+  
+  .footer-link {
     text-decoration: none;
-    color: #333;
-}
-
-footer a:hover {
-    color: #4CAF50;
-}
+    color: #b3b3b3;
+    transition: color 0.3s ease-in-out;
+  }
+  
+  .footer-link:hover {
+    color: #fff;
+  }
+  
