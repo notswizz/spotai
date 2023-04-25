@@ -14,11 +14,9 @@
         {% endif %}
         <form action="/" method="post">
             <div class="input-container">
-                <label for="user_input">Enter your favorite artist, genre, or keyword:</label>
-                <textarea id="user_input" name="user_input" rows="5" required></textarea>
-                <div class="btn-container">
-                    <button type="submit">Generate Playlist</button>
-                </div>
+                <label for="user_input">Prompt:</label>
+                <textarea id="user_input" name="user_input" placeholder="Enter your prompt here..." required></textarea>
+                <button type="submit">Generate Playlist</button>
             </div>
         </form>
     </div>

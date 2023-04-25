@@ -44,86 +44,26 @@ textarea {
     margin-bottom: 1rem;
     width: 100%;
     max-width: 500px;
+    height: 8rem;
+    resize: vertical;
+    outline: none;
+    background-color: #282828;
+    color: #fff;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 textarea::placeholder {
     color: #b3b3b3;
 }
 
-.btn-container {
-    display: flex;
-    justify-content: center;
-}
-
-button {
-    background-color: #1db954;
-    color: #fff;
-    font-size: 1rem;
-    font-weight: bold;
-    border-radius: 12px;
-    border: none;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease-in-out;
-    width: 100%;
-    max-width: 250px;
-    margin-bottom: 1rem;
-}
-
-button:hover {
-    background-color: #1ed760;
-}
-
-.result-container {
+.button-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 2rem;
+    justify-content: center;
 }
 
-.result-text {
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-}
-
-.result-link {
-    color: #1db954;
-    font-weight: bold;
-    text-decoration: none;
-}
-  
-  .result-link:hover {
-    color: #1ed760;
-  }
-  
-  footer {
-    position: absolute;
-    bottom: 1rem;
-    width: 100%;
-    text-align: center;
-  }
-  
-  .footer-text {
-    font-size: 0.9rem;
-    color: #b3b3b3;
-  }
-  
-  .heart {
-    color: red;
-  }
-  
-  .footer-link {
-    text-decoration: none;
-    color: #b3b3b3;
-    transition: color 0.3s ease-in-out;
-  }
-  
-  .footer-link:hover {
-    color: #fff;
-  }
-  
-  .btn {
+.btn {
     display: inline-block;
     padding: 0.5rem 1rem;
     border-radius: 12px;
@@ -153,3 +93,63 @@ button:hover {
 .btn-blue:hover {
     background-color: #44b2ff;
 }
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.footer {
+    position: absolute;
+    bottom: 1rem;
+    width: 100%;
+    text-align: center;
+}
+
+.footer-text {
+    font-size: 0.9rem;
+    color: #b3b3b3;
+}
+
+.heart {
+    color: red;
+}
+
+.footer-link {
+    text-decoration: none;
+    color: #b3b3b3;
+    transition: color 0.3s ease-in-out;
+}
+
+.footer-link:hover {
+    color: #fff;
+}
+
+.form-outline {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #1db954;
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    max-width: 500px;
+    width: 100%;
+}
+
+.form-outline:focus-within {
+    box-shadow: 0 0 0 3px #1db954;
+  }
+  
+  .form-outline:focus-within .form-control {
+    box-shadow: none;
+  }
+  
+  .btn:focus,
+  .btn:focus-within {
+    box-shadow: 0 0 0 3px #1db954;
+  }  
