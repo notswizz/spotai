@@ -20,6 +20,10 @@ def index():
 
         # Render the template with the Spotify URL
         return render_template('index.html', playlist_url=playlist_url)
+    
+    # If the request method is not POST, render the empty form
+    return render_template('index.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=int(os.environ.get('PORT', 8080)))
