@@ -6,6 +6,7 @@ from generate_playlist import generate_playlist
 from save_to_spotify import save_playlist_to_spotify, get_track_uris
 
 app = Flask(__name__)
+app.secret_key = "your_secret_key"
 
 SPOTIPY_CLIENT_ID = os.environ.get("SPOTIPY_CLIENT_ID")
 SPOTIPY_CLIENT_SECRET = os.environ.get("SPOTIPY_CLIENT_SECRET")
@@ -33,9 +34,13 @@ def index():
         user_input = request.form['user_input']
         track_names = generate_playlist(user_input)
         if track_names:
-            track_uris = get_track_uris(track_names, session["access_token"])
-            playlist_url = save_playlist_to_spotify(user_input, track_uris)
-            return render_template('result.html', playlist_url=playlist_url)
+            if "access_token" in session:
+                track_uris = get_track_uris(track_names, session["access_token"])
+                playlist_url = save_playlist_to_spotify(user_input, track_uris)
+                return render_template('result.html', playlist_url=playlist_url)
+            else:
+                error = "Access token not found. Please log in again."
+                return render_template('index.html', error=error)
         else:
             error = "Unable to generate a playlist. Please try again."
             return render_template('index.html', error=error)
