@@ -2,11 +2,11 @@ import os
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 
-# Get the redirect_uri from the environment variable
+
 redirect_uri = "https://spotai.herokuapp.com/"
 
-sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=os.environ['4a6221cb520a4097a6d0978642daa986'],
-                                               client_secret=os.environ['9895ce77e9564279878d4eb38c7987c8'],
+sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=os.environ['CLIENT_ID'],
+                                               client_secret=os.environ['SECRET_ID'],
                                                redirect_uri=redirect_uri,
                                                scope="playlist-modify-public"))
 
