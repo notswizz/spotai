@@ -5,7 +5,7 @@ openai.api_key = os.environ["OPENAI_API_KEY"]
 
 def generate_playlist(prompt):
     response = openai.Completion.create(
-        engine="text-davinci-002",
+        model="text-davinci-003",
         prompt=f"generate 13 songs that follow the prompt: {prompt}",
         temperature=0.7,
         max_tokens=100,
