@@ -1,7 +1,7 @@
 import os
 from flask import Flask, render_template, request, redirect, url_for
 from generate_playlist import generate_playlist
-from save_to_spotify import save_playlist_to_spotify
+from save_to_spotify import sp, save_playlist_to_spotify, get_track_uris
 
 app = Flask(__name__)
 
@@ -9,8 +9,10 @@ app = Flask(__name__)
 def index():
     if request.method == 'POST':
         prompt = request.form['prompt']
-        playlist = generate_playlist(prompt)
-        spotify_url = save_playlist_to_spotify(prompt, playlist)
+        track_names = generate_playlist(prompt)
+        track_uris = get_track_uris(track_names)  # Get track URIs
+        user_id = sp.me()["id"]  # Get user id
+        spotify_url = save_playlist_to_spotify(user_id, prompt, track_uris)  # Pass user_id and track_uris
         return redirect(url_for('result', spotify_url=spotify_url))
 
     return render_template('index.html')
