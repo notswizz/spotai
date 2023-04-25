@@ -20,9 +20,13 @@ def get_track_uris(track_names, access_token):
             print(f"No results found for '{track_name}', skipping.")
     return track_uris
 
-def save_playlist_to_spotify(playlist_name, track_uris):
+def save_playlist_to_spotify(playlist_name, track_uris, access_token):
+    auth_manager = SpotifyOAuth(client_id=SPOTIPY_CLIENT_ID, client_secret=SPOTIPY_CLIENT_SECRET, redirect_uri=SPOTIPY_REDIRECT_URI, scope='playlist-modify-public')
+    sp = spotipy.Spotify(auth_manager=auth_manager, auth=access_token)
+    
     user_id = sp.me()['id']
-    playlist = sp.user_playlist_create(user_id, playlist_name, public=True, description="")
+    playlist = sp.user_playlist_create(user_id, playlist_name, public=True)
     playlist_id = playlist['id']
     sp.playlist_add_items(playlist_id, track_uris)
+
     return playlist['external_urls']['spotify']

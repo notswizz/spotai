@@ -1,18 +1,12 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Playlist Result</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-    {% if playlist_url %}
-    <p>Your playlist has been created! Check it out <a href="{{ playlist_url }}" target="_blank">here</a>.</p>
-    {% endif %}
-    <a href="{{ url_for('index') }}">Generate another playlist</a>
-    <footer>
-        <p>built with <span class="heart">&hearts;</span> by <a href="YOUR_GITHUB_LINK_HERE" target="_blank">jack</a></p>
-    </footer>
-</body>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Result</title>
+  </head>
+  <body>
+    <h1>Playlist created successfully!</h1>
+    <p><a href="{{ playlist_url }}" target="_blank">Click here to view your playlist on Spotify</a></p>
+  </body>
 </html>

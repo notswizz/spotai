@@ -39,14 +39,12 @@ def index():
         track_names = generate_playlist(user_input)
         if track_names:
             track_uris = get_track_uris(track_names, session["access_token"])
-            playlist_url = save_playlist_to_spotify(user_input, track_uris)
+            playlist_url = save_playlist_to_spotify(user_input, track_uris, session["access_token"])  # Include the access token
             return render_template('result.html', playlist_url=playlist_url)
         else:
             error = "Unable to generate a playlist. Please try again."
             return render_template('index.html', error=error)
     return render_template('index.html')
-
-
 
 @app.route('/result')
 def result():
