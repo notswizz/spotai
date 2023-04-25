@@ -9,7 +9,8 @@ SPOTIPY_REDIRECT_URI = os.environ.get("SPOTIPY_REDIRECT_URI")
 auth_manager = SpotifyOAuth(client_id=SPOTIPY_CLIENT_ID, client_secret=SPOTIPY_CLIENT_SECRET, redirect_uri=SPOTIPY_REDIRECT_URI, scope='playlist-modify-public')
 sp = spotipy.Spotify(auth_manager=auth_manager)
 
-def get_track_uris(track_names):
+def get_track_uris(track_names, access_token):
+    sp = spotipy.Spotipy(auth=access_token)
     track_uris = []
     for track_name in track_names:
         results = sp.search(q=track_name, limit=1, type="track")

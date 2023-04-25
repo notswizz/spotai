@@ -14,19 +14,32 @@ SPOTIPY_REDIRECT_URI = os.environ.get("SPOTIPY_REDIRECT_URI")
 auth_manager = SpotifyOAuth(client_id=SPOTIPY_CLIENT_ID, client_secret=SPOTIPY_CLIENT_SECRET, redirect_uri=SPOTIPY_REDIRECT_URI, scope='playlist-modify-public')
 sp = spotipy.Spotify(auth_manager=auth_manager)
 
+@app.route("/login")
+def login():
+    auth_url = sp_oauth.get_authorize_url()
+    return redirect(auth_url)
+
+
+@app.route("/callback")
+def callback():
+    code = request.args.get("code")
+    token_info = sp_oauth.get_access_token(code)
+    access_token = token_info["access_token"]
+    session["access_token"] = access_token
+    return redirect(url_for("index"))
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
-        prompt = request.form['prompt']
-        playlist_name = request.form['playlist_name']
-
-        track_names = generate_playlist(prompt)
-        track_uris = get_track_uris(track_names)
-        playlist_url = save_playlist_to_spotify(playlist_name, track_uris)
-
-        return redirect(url_for('result', playlist_url=playlist_url))
-
-    return render_template("index.html")
+        user_input = request.form['user_input']
+        track_names = generate_playlist(user_input)
+        if track_names:
+            playlist_url = save_to_spotify(track_names)
+            return render_template('result.html', playlist_url=playlist_url)
+        else:
+            error = "Unable to generate a playlist. Please try again."
+            return render_template('index.html', error=error)
+    return render_template('index.html')
 
 @app.route('/result')
 def result():
