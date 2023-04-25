@@ -16,7 +16,7 @@ def get_track_uris(track_names):
         track_uris.append(results['tracks']['items'][0]['uri'])
     return track_uris
 
-def create_playlist(playlist_name, track_uris):
+def save_playlist_to_spotify(playlist_name, track_uris):
     user_id = sp.me()['id']
     playlist = sp.user_playlist_create(user_id, playlist_name, public=True, description="")
     playlist_id = playlist['id']
