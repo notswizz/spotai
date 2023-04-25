@@ -26,6 +26,10 @@ def save_playlist_to_spotify(playlist_name, track_uris):
     sp.playlist_add_items(playlist_id, track_uris)
     return playlist['external_urls']['spotify']
 
+@app.route("/")
+def hello_world():
+    return "Hello, World!"
+
 @app.route('/create_playlist', methods=['POST'])
 def create_playlist():
     data = request.get_json()
