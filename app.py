@@ -1,31 +1,41 @@
 import os
-from flask import Flask, render_template, request
-from save_to_spotify import get_track_uris, save_playlist_to_spotify
-from generate_playlist import generate_playlist
+import spotipy
+from spotipy.oauth2 import SpotifyOAuth
+from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
-@app.route('/', methods=['GET', 'POST'])
-def index():
-    if request.method == 'POST':
-        # Get the user's input from the form
-        prompt = request.form.get('prompt')
-        playlist_name = request.form.get('playlist_name')
+SPOTIPY_CLIENT_ID = os.environ.get("SPOTIPY_CLIENT_ID")
+SPOTIPY_CLIENT_SECRET = os.environ.get("SPOTIPY_CLIENT_SECRET")
+SPOTIPY_REDIRECT_URI = os.environ.get("SPOTIPY_REDIRECT_URI")
 
-        # Generate the list of song names based on the prompt
-        track_names = generate_playlist(prompt)
+auth_manager = SpotifyOAuth(client_id=SPOTIPY_CLIENT_ID, client_secret=SPOTIPY_CLIENT_SECRET, redirect_uri=SPOTIPY_REDIRECT_URI, scope='playlist-modify-public')
+sp = spotipy.Spotify(auth_manager=auth_manager)
 
-        # Get the Spotify URIs for the song names
-        track_uris = get_track_uris(track_names)
+def get_track_uris(track_names):
+    track_uris = []
+    for track_name in track_names:
+        results = sp.search(q=track_name, limit=1, type="track")
+        track_uris.append(results['tracks']['items'][0]['uri'])
+    return track_uris
 
-        # Save the playlist to Spotify and get the Spotify URL
-        playlist_url = save_playlist_to_spotify(playlist_name, track_uris)
+def save_playlist_to_spotify(playlist_name, track_uris):
+    user_id = sp.me()['id']
+    playlist = sp.user_playlist_create(user_id, playlist_name, public=True, description="")
+    playlist_id = playlist['id']
+    sp.playlist_add_items(playlist_id, track_uris)
+    return playlist['external_urls']['spotify']
 
-        # Render the template with the Spotify URL
-        return render_template('index.html', playlist_url=playlist_url)
-    
-    # If the request method is not POST, render the empty form
-    return render_template('index.html')
+@app.route('/create_playlist', methods=['POST'])
+def create_playlist():
+    data = request.get_json()
+    playlist_name = data['playlist_name']
+    track_names = data['track_names']
+
+    track_uris = get_track_uris(track_names)
+    playlist_url = save_playlist_to_spotify(playlist_name, track_uris)
+
+    return jsonify({"playlist_url": playlist_url})
 
 if __name__ == '__main__':
-    app.run(debug=True, port=int(os.environ.get('PORT', 8080)))
+    app.run(debug=True)
