@@ -9,20 +9,19 @@
 </head>
 <body>
     <div class="container">
-        <h1>Playlist Generator</h1>
         {% if error %}
             <p class="error">{{ error }}</p>
         {% endif %}
         <form action="/" method="post">
             <div class="input-container">
-                <label for="user_input">Enter your favorite artist, genre, or keyword:</label>
+                <label for="user_input">prompt:</label>
                 <input type="text" id="user_input" name="user_input" required>
-                <button type="submit">Generate Playlist</button>
+                <button type="submit">generate playlist</button>
             </div>
         </form>
     </div>
     <footer>
-        <p>Made with <span class="heart">&#10084;</span> by Your Name</p>
+        <p>made with <span class="heart">&#10084;</span> by jack</p>
     </footer>
 </body>
 </html>
