@@ -31,6 +31,9 @@ def callback():
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    if "access_token" not in session:
+        return redirect(url_for("login"))
+
     if request.method == 'POST':
         user_input = request.form['user_input']
         track_names = generate_playlist(user_input)
@@ -42,6 +45,7 @@ def index():
             error = "Unable to generate a playlist. Please try again."
             return render_template('index.html', error=error)
     return render_template('index.html')
+
 
 @app.route('/result')
 def result():
