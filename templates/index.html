@@ -1,23 +1,27 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Spotify Playlist Generator</title>
-  </head>
-  <body>
-    <h1>Spotify Playlist Generator</h1>
-    <form action="/" method="POST">
-      <label for="prompt">Playlist prompt:</label>
-      <input type="text" id="prompt" name="prompt" required>
-      <br>
-      <label for="playlist_name">Playlist name:</label>
-      <input type="text" id="playlist_name" name="playlist_name" required>
-      <br>
-      <input type="submit" value="Generate Playlist">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playlist Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <form action="/" method="post">
+        <div class="input-container">
+            <textarea id="prompt" name="prompt" required placeholder="prompt" rows="4" cols="50"></textarea>
+            <br>
+            <input type="text" id="playlist_name" name="playlist_name" required placeholder="Playlist name">
+            <br>
+            <button type="submit">Generate playlist</button>
+        </div>
     </form>
     {% if playlist_url %}
-      <p>Your playlist has been created! Check it out <a href="{{ playlist_url }}">here</a>.</p>
+    <p>Your playlist has been created! Check it out <a href="{{ playlist_url }}" target="_blank">here</a>.</p>
     {% endif %}
-  </body>
+    <footer>
+        <p>built with <span class="heart">&hearts;</span> by <a href="YOUR_GITHUB_LINK_HERE" target="_blank">jack</a></p>
+    </footer>
+    
+</body>
 </html>
