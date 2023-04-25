@@ -8,19 +8,18 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <div class="container">
-        {% if error %}
-            <p class="error">{{ error }}</p>
-        {% endif %}
-        <form action="/" method="post">
-            <div class="input-container green-outline">
-                <textarea id="user_input" name="user_input" rows="3" required></textarea>
-                <div class="index-button-container"></div>
-                    <button type="submit">Generate Playlist</button>
+    <h1>playlist generator</h1>
+    <form action="/result" method="post">
+        <div class="input-container">
+            <label for="prompt">enter a prompt:</label>
+            <textarea id="prompt" name="prompt" placeholder="e.g., songs for a road trip" required></textarea>
+            <div class="index-button-container">
+                <div class="button-outline">
+                    <button type="submit">generate playlist</button>
                 </div>
             </div>
-        </form>
-    </div>
+        </div>
+    </form>
     <footer>
         <p>made with <span class="heart">&#10084;</span> by jack</p>
     </footer>
