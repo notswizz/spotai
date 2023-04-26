@@ -24,9 +24,11 @@ def login():
 @app.route("/callback")
 def callback():
     code = request.args.get("code")
-    token_info = auth_manager.get_access_token(code, as_dict=True)
-    session["access_token"] = token_info["access_token"]
-    session["refresh_token"] = token_info["refresh_token"]
+    token_info = auth_manager.get_access_token(code)
+    access_token = token_info["access_token"]
+    refresh_token = token_info["refresh_token"]
+    session["access_token"] = access_token
+    session["refresh_token"] = refresh_token
     return redirect(url_for("index"))
 
 @app.route('/', methods=['GET', 'POST'])
@@ -38,8 +40,8 @@ def index():
         user_input = request.form['prompt']
         track_names = generate_playlist(user_input)
         if track_names:
-            track_uris = get_track_uris(track_names, session["access_token"])
-            playlist_url = save_playlist_to_spotify(user_input, track_uris, session["access_token"])  # Include the access token
+            track_uris = get_track_uris(track_names, session["access_token"], session["refresh_token"])
+            playlist_url = save_playlist_to_spotify(user_input, track_uris, session["access_token"])
             return render_template('result.html', playlist_url=playlist_url)
         else:
             error = "Unable to generate a playlist. Please try again."
