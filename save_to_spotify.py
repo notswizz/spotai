@@ -6,7 +6,10 @@ SPOTIPY_CLIENT_ID = os.environ.get("SPOTIPY_CLIENT_ID")
 SPOTIPY_CLIENT_SECRET = os.environ.get("SPOTIPY_CLIENT_SECRET")
 SPOTIPY_REDIRECT_URI = os.environ.get("SPOTIPY_REDIRECT_URI")
 
-def get_popular_track_uris(query, min_popularity, limit, access_token, refresh_token):
+auth_manager = SpotifyOAuth(client_id=SPOTIPY_CLIENT_ID, client_secret=SPOTIPY_CLIENT_SECRET, redirect_uri=SPOTIPY_REDIRECT_URI, scope='playlist-modify-public')
+sp = spotipy.Spotify(auth_manager=auth_manager)
+
+def get_track_uris(track_names, access_token, refresh_token):
     SPOTIPY_CLIENT_ID = os.environ.get("SPOTIPY_CLIENT_ID")
     SPOTIPY_CLIENT_SECRET = os.environ.get("SPOTIPY_CLIENT_SECRET")
     SPOTIPY_REDIRECT_URI = os.environ.get("SPOTIPY_REDIRECT_URI")
@@ -21,20 +24,26 @@ def get_popular_track_uris(query, min_popularity, limit, access_token, refresh_t
     access_token = token_info['access_token']
 
     sp = spotipy.Spotify(auth=access_token)
+    # rest of the function
 
-    try:
-        results = sp.search(q=f"{query} popularity:>={min_popularity}", type="track", limit=limit)
-    except spotipy.exceptions.SpotifyException as e:
-        if e.http_status == 401 and e.msg == "The access token expired":
-            new_token_info = sp_oauth.refresh_access_token(refresh_token)
-            access_token = new_token_info["access_token"]
-            sp.set_auth(access_token)
+    track_uris = []
+    for track_name in track_names:
+        try:
+            results = sp.search(q=track_name, limit=1, type="track")
+        except spotipy.exceptions.SpotifyException as e:
+            if e.http_status == 401 and e.msg == "The access token expired":
+                new_token_info = sp_oauth.refresh_access_token(refresh_token)
+                access_token = new_token_info["access_token"]
+                sp.set_auth(access_token)
 
-            results = sp.search(q=f"{query} popularity:>={min_popularity}", type="track", limit=limit)
+                results = sp.search(q=track_name, limit=1, type="track")
+            else:
+                raise e
+
+        if results['tracks']['items']:
+            track_uris.append(results['tracks']['items'][0]['uri'])
         else:
-            raise e
-
-    track_uris = [item['uri'] for item in results['tracks']['items']]
+            print(f"No results found for '{track_name}', skipping.")
     return track_uris
 
 def save_playlist_to_spotify(playlist_name, track_uris, access_token):

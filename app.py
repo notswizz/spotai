@@ -3,7 +3,7 @@ import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 from flask import Flask, request, render_template, redirect, url_for, session
 from generate_playlist import generate_playlist
-from save_to_spotify import save_playlist_to_spotify, get_popular_track_uris
+from save_to_spotify import save_playlist_to_spotify, get_track_uris
 
 app = Flask(__name__)
 
@@ -47,16 +47,11 @@ def index():
 
     if request.method == 'POST':
         user_input = request.form['prompt']
-        print(f"User input: {user_input}")  # Add this line
-        sp = refresh_token_if_needed()
-        min_popularity = 50  # Minimum popularity value
-        limit = 20  # Number of tracks to be fetched
-
-        track_uris = get_popular_track_uris(user_input, min_popularity, limit, session["access_token"], session["refresh_token"])
-        print(f"Track URIs: {track_uris}")  # Add this line
-        if track_uris:
+        track_names = generate_playlist(user_input)
+        if track_names:
+            sp = refresh_token_if_needed()
+            track_uris = get_track_uris(track_names, session["access_token"], session["refresh_token"])
             playlist_url = save_playlist_to_spotify(user_input, track_uris, session["access_token"])
-            print(f"Playlist URL: {playlist_url}")  # Add this line
             return render_template('result.html', playlist_url=playlist_url)
         else:
             error = "Unable to generate a playlist. Please try again."
