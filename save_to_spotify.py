@@ -10,12 +10,21 @@ auth_manager = SpotifyOAuth(client_id=SPOTIPY_CLIENT_ID, client_secret=SPOTIPY_C
 sp = spotipy.Spotify(auth_manager=auth_manager)
 
 def get_track_uris(track_names, access_token, refresh_token):
-    sp = spotipy.Spotify(auth=access_token)
+    SPOTIPY_CLIENT_ID = os.environ.get("SPOTIPY_CLIENT_ID")
+    SPOTIPY_CLIENT_SECRET = os.environ.get("SPOTIPY_CLIENT_SECRET")
+    SPOTIPY_REDIRECT_URI = os.environ.get("SPOTIPY_REDIRECT_URI")
+
     sp_oauth = SpotifyOAuth(client_id=SPOTIPY_CLIENT_ID,
                             client_secret=SPOTIPY_CLIENT_SECRET,
                             redirect_uri=SPOTIPY_REDIRECT_URI,
-                            scope='playlist-modify-public',
-                            refresh_token=refresh_token)
+                            scope='playlist-modify-public')
+                            
+    # Refresh the access token if necessary
+    token_info = sp_oauth.refresh_access_token(refresh_token)
+    access_token = token_info['access_token']
+
+    sp = spotipy.Spotify(auth=access_token)
+    # rest of the function
 
     track_uris = []
     for track_name in track_names:
