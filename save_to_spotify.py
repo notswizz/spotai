@@ -9,11 +9,28 @@ SPOTIPY_REDIRECT_URI = os.environ.get("SPOTIPY_REDIRECT_URI")
 auth_manager = SpotifyOAuth(client_id=SPOTIPY_CLIENT_ID, client_secret=SPOTIPY_CLIENT_SECRET, redirect_uri=SPOTIPY_REDIRECT_URI, scope='playlist-modify-public')
 sp = spotipy.Spotify(auth_manager=auth_manager)
 
-def get_track_uris(track_names, access_token):
+def get_track_uris(track_names, access_token, refresh_token):
     sp = spotipy.Spotify(auth=access_token)
+    sp_oauth = SpotifyOAuth(client_id=SPOTIPY_CLIENT_ID,
+                            client_secret=SPOTIPY_CLIENT_SECRET,
+                            redirect_uri=SPOTIPY_REDIRECT_URI,
+                            scope='playlist-modify-public',
+                            refresh_token=refresh_token)
+
     track_uris = []
     for track_name in track_names:
-        results = sp.search(q=track_name, limit=1, type="track")
+        try:
+            results = sp.search(q=track_name, limit=1, type="track")
+        except spotipy.exceptions.SpotifyException as e:
+            if e.http_status == 401 and e.msg == "The access token expired":
+                new_token_info = sp_oauth.refresh_access_token(refresh_token)
+                access_token = new_token_info["access_token"]
+                sp.set_auth(access_token)
+
+                results = sp.search(q=track_name, limit=1, type="track")
+            else:
+                raise e
+
         if results['tracks']['items']:
             track_uris.append(results['tracks']['items'][0]['uri'])
         else:

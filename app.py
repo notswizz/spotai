@@ -24,9 +24,9 @@ def login():
 @app.route("/callback")
 def callback():
     code = request.args.get("code")
-    token_info = auth_manager.get_access_token(code)
-    access_token = token_info["access_token"]
-    session["access_token"] = access_token
+    token_info = auth_manager.get_access_token(code, as_dict=True)
+    session["access_token"] = token_info["access_token"]
+    session["refresh_token"] = token_info["refresh_token"]
     return redirect(url_for("index"))
 
 @app.route('/', methods=['GET', 'POST'])
