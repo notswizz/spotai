@@ -47,13 +47,16 @@ def index():
 
     if request.method == 'POST':
         user_input = request.form['prompt']
+        print(f"User input: {user_input}")  # Add this line
         sp = refresh_token_if_needed()
         min_popularity = 50  # Minimum popularity value
         limit = 20  # Number of tracks to be fetched
 
         track_uris = get_popular_track_uris(user_input, min_popularity, limit, session["access_token"], session["refresh_token"])
+        print(f"Track URIs: {track_uris}")  # Add this line
         if track_uris:
             playlist_url = save_playlist_to_spotify(user_input, track_uris, session["access_token"])
+            print(f"Playlist URL: {playlist_url}")  # Add this line
             return render_template('result.html', playlist_url=playlist_url)
         else:
             error = "Unable to generate a playlist. Please try again."
