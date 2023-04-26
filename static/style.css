@@ -54,7 +54,7 @@ textarea::placeholder {
 
 .button {
     display: block;
-    background-color: #1db954;
+    background-color: #000000;
     color: #fff;
     font-size: 1rem;
     font-weight: bold;
@@ -62,7 +62,7 @@ textarea::placeholder {
     border: none;
     padding: 0.5rem 1rem;
     cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 4px rgb(255, 255, 255);
     transition: background-color 0.3s ease-in-out;
     width: 100%;
     max-width: 250px;
