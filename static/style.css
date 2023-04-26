@@ -35,17 +35,25 @@ label {
     margin-bottom: 1rem;
 }
 
+textarea {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    margin-bottom: 1rem;
+    width: 100%;
+    max-width: 250px;
+    min-height: 80px;
+    resize: vertical;
+}
 
 textarea::placeholder {
     color: #b3b3b3;
 }
 
-.btn-container {
-    display: flex;
-    justify-content: center;
-}
-
-button {
+.button {
+    display: block;
     background-color: #1db954;
     color: #fff;
     font-size: 1rem;
@@ -59,9 +67,12 @@ button {
     width: 100%;
     max-width: 250px;
     margin-bottom: 1rem;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-button:hover {
+.button:hover {
     background-color: #1ed760;
 }
 
