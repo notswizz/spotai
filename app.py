@@ -14,7 +14,16 @@ SPOTIPY_REDIRECT_URI = os.environ.get("SPOTIPY_REDIRECT_URI")
 app.secret_key = os.environ.get("FLASK_SECRET_KEY")
 
 auth_manager = SpotifyOAuth(client_id=SPOTIPY_CLIENT_ID, client_secret=SPOTIPY_CLIENT_SECRET, redirect_uri=SPOTIPY_REDIRECT_URI, scope='playlist-modify-public')
-sp = spotipy.Spotify(auth_manager=auth_manager)
+
+def refresh_token_if_needed():
+    sp = spotipy.Spotify(auth=session["access_token"])
+    try:
+        sp.me()
+    except spotipy.SpotifyException:
+        new_token = auth_manager.refresh_access_token(session["refresh_token"])
+        session["access_token"] = new_token["access_token"]
+        sp = spotipy.Spotify(auth=session["access_token"])
+    return sp
 
 @app.route("/login")
 def login():
@@ -40,6 +49,7 @@ def index():
         user_input = request.form['prompt']
         track_names = generate_playlist(user_input)
         if track_names:
+            sp = refresh_token_if_needed()
             track_uris = get_track_uris(track_names, session["access_token"], session["refresh_token"])
             playlist_url = save_playlist_to_spotify(user_input, track_uris, session["access_token"])
             return render_template('result.html', playlist_url=playlist_url)
