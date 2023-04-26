@@ -35,7 +35,7 @@ def index():
         return redirect(url_for("login"))
 
     if request.method == 'POST':
-        user_input = request.form['user_input']
+        user_input = request.form['prompt']
         track_names = generate_playlist(user_input)
         if track_names:
             track_uris = get_track_uris(track_names, session["access_token"])
