@@ -77,12 +77,6 @@ textarea::placeholder {
     background-color: #1ed760;
 }
 
-.result-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 2rem;
-}
 
 .result-text {
     font-size: 1.2rem;
@@ -181,4 +175,26 @@ textarea {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     margin-bottom: 1rem;
     width: 250px;
+}
+
+.result-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.playlist-image {
+    width: 256px;
+    height: 256px;
+    border: 3px solid #1db954;
+    border-radius: 6px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    margin-bottom: 1rem;
 }
