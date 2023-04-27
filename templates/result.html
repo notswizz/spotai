@@ -3,19 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>spotai</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Generated Playlist</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <div class="container result-container">
+        <h1>Generated Playlist</h1>
+        <img src="{{ image_url }}" alt="Generated Playlist Image" class="playlist-image">
         <div class="button-container">
             <a href="/" class="btn btn-green result-btn">generate another playlist</a>
-            <a href="{{ playlist_url }}" class="btn btn-blue result-btn" target="_blank">view playlist</a>
+            <a href="{{ playlist_url }}" class="btn btn-green result-btn">open playlist on Spotify</a>
         </div>
     </div>
-    <footer>
-        <p>made with <span class="heart">&#10084;</span> by jack</p>
-    </footer>
 </body>
 </html>

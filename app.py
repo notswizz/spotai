@@ -4,6 +4,7 @@ from spotipy.oauth2 import SpotifyOAuth
 from flask import Flask, request, render_template, redirect, url_for, session
 from generate_playlist import generate_playlist
 from save_to_spotify import save_playlist_to_spotify, get_track_uris
+from generate_image import generate_image_url
 
 app = Flask(__name__)
 
@@ -52,7 +53,8 @@ def index():
             sp = refresh_token_if_needed()
             track_uris = get_track_uris(track_names, session["access_token"], session["refresh_token"])
             playlist_url = save_playlist_to_spotify(user_input, track_uris, session["access_token"])
-            return render_template('result.html', playlist_url=playlist_url)
+            image_url = generate_image_url(user_input)
+            return render_template('result.html', playlist_url=playlist_url, image_url=image_url)
         else:
             error = "Unable to generate a playlist. Please try again."
             return render_template('index.html', error=error)
@@ -61,7 +63,8 @@ def index():
 @app.route('/result')
 def result():
     playlist_url = request.args.get('playlist_url', None)
-    return render_template("result.html", playlist_url=playlist_url)
+    image_url = request.args.get('image_url', None)
+    return render_template("result.html", playlist_url=playlist_url, image_url=image_url)
 
 if __name__ == '__main__':
     app.run(debug=True)
