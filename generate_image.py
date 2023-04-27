@@ -1,24 +1,28 @@
 import os
 import requests
+import json
 
-DALLE_API_KEY = os.environ["OPENAI_API_KEY"]
-DALLE_API_URL = "https://api.openai.com/v1/images/generations"
+OPENAI_API_KEY = os.environ["OPENAI_API_KEY"]
 
-def generate_image(prompt):
+def generate_image_url(prompt):
     headers = {
-        "Content-Type": "application/json",
-        "Authorization": f"Bearer {DALLE_API_KEY}",
+        'Content-Type': 'application/json',
+        'Authorization': f'Bearer {OPENAI_API_KEY}'
     }
 
     data = {
         "model": "image-alpha-001",
-        "prompt": prompt,
-        "num_images": 1,
-        "size": "256x256",
+        "prompt": f"{prompt}",
+        "num_images":1,
+        "size":"256x256",
+        "response_format":"url"
     }
 
-    response = requests.post(DALLE_API_URL, json=data, headers=headers)
-    response.raise_for_status()
+    response = requests.post('https://api.openai.com/v1/images/generations', headers=headers, json=data)
+    response_data = json.loads(response.text)
 
-    image_url = response.json()["data"][0]["url"]
-    return image_url
+    if response.status_code == 200 and response_data['data']:
+        return response_data['data'][0]['url']
+    else:
+        print("Error generating image:", response.text)
+        return None
