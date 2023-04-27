@@ -1,7 +1,7 @@
 import os
 import requests
 
-DALLE_API_KEY = os.environ["DALLE_API_KEY"]
+DALLE_API_KEY = os.environ["OPENAI_API_KEY"]
 DALLE_API_URL = "https://api.openai.com/v1/images/generations"
 
 def generate_image(prompt):
