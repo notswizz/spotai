@@ -54,18 +54,12 @@ def index():
             track_uris = get_track_uris(track_names, session["access_token"], session["refresh_token"])
             playlist_url = save_playlist_to_spotify(user_input, track_uris, session["access_token"])
             image_url = generate_image_url(user_input)
-            return render_template('result.html', playlist_url=playlist_url, image_url=image_url)
+            return render_template('result.html', playlist_url=playlist_url, image_url=image_url, prompt=user_input)
+
         else:
             error = "Unable to generate a playlist. Please try again."
             return render_template('index.html', error=error)
     return render_template('index.html')
-
-@app.route('/result')
-def result():
-    playlist_url = request.args.get('playlist_url', None)
-    image_url = request.args.get('image_url', None)
-    return render_template('result.html', playlist_url=playlist_url, image_url=image_url, prompt=user_input)
-
 
 
 if __name__ == '__main__':
