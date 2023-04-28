@@ -64,7 +64,8 @@ def index():
 def result():
     playlist_url = request.args.get('playlist_url', None)
     image_url = request.args.get('image_url', None)
-    return render_template("result.html", playlist_url=playlist_url, image_url=image_url)
+    return render_template("result.html", image_url=image_url, playlist_url=playlist_url, prompt=prompt)
+
 
 if __name__ == '__main__':
     app.run(debug=True)

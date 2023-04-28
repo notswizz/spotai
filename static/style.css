@@ -199,3 +199,9 @@ textarea {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     margin-bottom: 1rem;
 }
+
+.prompt-text {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
