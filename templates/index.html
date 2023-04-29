@@ -9,15 +9,19 @@
 </head>
 <body>
     <div class="container">
-        <form action="/" method="post">
+        <form id="generate-form" action="/" method="post">
             <div class="input-container">
                 <textarea name="prompt" id="prompt" rows="2" placeholder="prompt"></textarea>
                 <input type="image" src="{{ url_for('static', filename='assets/button_generate-playlist.png') }}" alt="Generate Playlist" class="button" />
             </div>
         </form>
+        <div id="loading" class="loading">
+            <img src="{{ url_for('static', filename='assets/loading.gif') }}" alt="Loading">
+        </div>
     </div>
     <footer>
         <p>made with <span class="heart">&#10084;</span> by jack</p>
     </footer>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
