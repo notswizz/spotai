@@ -185,8 +185,8 @@ textarea {
     border: 3px solid #1db954; /* Added border style */
     border-radius: 6px; /* Added border-radius */
     padding: 1rem; /* Added padding */
-    justify-content: space-between;
-    align-items: flex-start;
+    justify-content: center;
+    align-items: center;
 }
 
 .content {
@@ -198,27 +198,6 @@ textarea {
 .button-container {
     margin-top: 1em;
 }
-
-/* New styles from result.html */
-.result-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-}
-
-.content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.button-container {
-    margin-top: 1em;
-}
-
-
-
-
 
 
 
@@ -252,15 +231,17 @@ textarea {
     word-wrap: break-word;
 }
 
-.result-container {
-    display: flex;
-    
-}
+
 .content {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 1em;
 }
+
 .button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-top: 1em;
 }
