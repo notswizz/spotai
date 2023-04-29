@@ -77,7 +77,6 @@ textarea::placeholder {
     background-color: #1ed760;
 }
 
-
 .result-text {
     font-size: 1.2rem;
     margin-bottom: 1rem;
@@ -88,11 +87,11 @@ textarea::placeholder {
     font-weight: bold;
     text-decoration: none;
 }
-  
+
 .result-link:hover {
     color: #1ed760;
 }
-  
+
 .result-btn {
     margin: 0 0.5rem;
     display: inline-block;
@@ -110,26 +109,26 @@ footer {
     width: 100%;
     text-align: center;
 }
-  
+
 .footer-text {
     font-size: 0.9rem;
     color: #b3b3b3;
 }
-  
+
 .heart {
     color: rgb(31, 7, 240);
 }
-  
+
 .footer-link {
     text-decoration: none;
     color: #b3b3b3;
     transition: color 0.3s ease-in-out;
 }
-  
+
 .footer-link:hover {
     color: #fff;
 }
-  
+
 .btn {
     display: inline-block;
     padding: 0.5rem 1rem;
@@ -182,25 +181,12 @@ textarea {
     flex-direction: column;
     margin-top: 2rem;
     margin-bottom: 2rem;
-    border: 3px solid #1db954; /* Added border style */
-    border-radius: 6px; /* Added border-radius */
-    padding: 1rem; /* Added padding */
-    justify-content: center;
-    align-items: center;
+    border: 3px solid #1db954;
+    border-radius: 6px;
+    padding: 1rem;
+    justify-content: space-between;
+    align-items: flex-start;
 }
-
-.content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.button-container {
-    margin-top: 1em;
-}
-
-
-
 
 .content {
     display: flex;
@@ -231,17 +217,20 @@ textarea {
     word-wrap: break-word;
 }
 
+.button-container {
+    margin-top: 1em;
+}
+
+.result-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
 
 .content {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 1em;
-}
-
-.button-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 1em;
+    margin-right: 1rem;
 }
