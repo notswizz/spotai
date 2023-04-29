@@ -25,4 +25,5 @@ def generate_image_url(prompt):
         return response_data['data'][0]['url']
     else:
         print("Error generating image:", response.text)
-        return None
+        # Return the path to the static "noimage.png" image
+        return "static/assets/noimage.png"
