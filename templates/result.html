@@ -10,13 +10,14 @@
     <div class="container result-container">
         <div class="content">
             <p class="prompt-text">{{ prompt }}</p>
-            <iframe src="{{ playlist_url }}" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-            <div class="iframe-container">
-                <img src="{{ image_url }}" alt="Generated Playlist Image" class="playlist-image">
-            </div>
+           
+            <img src="{{ image_url }}" alt="Generated Playlist Image" class="playlist-image">
             <div class="button-container">
                 <a href="{{ playlist_url }}" class="btn btn-green result-btn">open</a>
                 <a href="/" class="btn btn-green result-btn">new</a>
+            </div>
+            <div class="iframe-container">
+                <iframe src="{{ playlist_url }}" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
             </div>
         </div>
     </div>
