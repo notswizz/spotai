@@ -59,7 +59,8 @@ def save_playlist_to_spotify(playlist_name, track_uris, access_token):
     playlist_id = playlist['id']
     sp.playlist_add_items(playlist_id, track_uris)
 
-    return playlist['external_urls']['spotify']
+    return f"https://open.spotify.com/embed/playlist/{playlist_id}"
+
 
 def set_playlist_image(playlist_id, image_url, access_token):
     image_data = requests.get(image_url).content

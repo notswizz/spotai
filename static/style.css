@@ -183,6 +183,9 @@ textarea {
     align-items: center;
     margin-top: 2rem;
     margin-bottom: 2rem;
+    border: 3px solid #1db954; /* Added border style */
+    border-radius: 6px; /* Added border-radius */
+    padding: 1rem; /* Added padding */
 }
 
 .content {
