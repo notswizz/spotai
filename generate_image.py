@@ -12,7 +12,7 @@ def generate_image_url(prompt):
 
     data = {
         "model": "image-alpha-001",
-        "prompt": f"{prompt}",
+        "prompt": f"Generate a cover art for a music playlist with theme: {prompt}",
         "num_images":1,
         "size":"256x256",
         "response_format":"url"
