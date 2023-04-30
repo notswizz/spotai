@@ -2,6 +2,8 @@ import os
 import spotipy
 import base64
 import requests
+from io import BytesIO
+from PIL import Image
 from spotipy.oauth2 import SpotifyOAuth
 
 SPOTIPY_CLIENT_ID = os.environ.get("SPOTIPY_CLIENT_ID")
@@ -10,6 +12,13 @@ SPOTIPY_REDIRECT_URI = os.environ.get("SPOTIPY_REDIRECT_URI")
 
 auth_manager = SpotifyOAuth(client_id=SPOTIPY_CLIENT_ID, client_secret=SPOTIPY_CLIENT_SECRET, redirect_uri=SPOTIPY_REDIRECT_URI, scope='playlist-modify-public')
 sp = spotipy.Spotify(auth_manager=auth_manager)
+
+def resize_and_compress_image(image_data):
+    img = Image.open(BytesIO(image_data))
+    img = img.resize((300, 300), Image.ANTIALIAS)
+    output = BytesIO()
+    img.save(output, format='JPEG', quality=85)
+    return output.getvalue()
 
 def get_track_uris(track_names, access_token, refresh_token):
     SPOTIPY_CLIENT_ID = os.environ.get("SPOTIPY_CLIENT_ID")
@@ -26,7 +35,6 @@ def get_track_uris(track_names, access_token, refresh_token):
     access_token = token_info['access_token']
 
     sp = spotipy.Spotify(auth=access_token)
-    # rest of the function
 
     track_uris = []
     for track_name in track_names:
@@ -48,8 +56,6 @@ def get_track_uris(track_names, access_token, refresh_token):
             print(f"No results found for '{track_name}', skipping.")
     return track_uris
 
-
-
 def save_playlist_to_spotify(playlist_name, track_uris, access_token):
     auth_manager = SpotifyOAuth(client_id=SPOTIPY_CLIENT_ID, client_secret=SPOTIPY_CLIENT_SECRET, redirect_uri=SPOTIPY_REDIRECT_URI, scope='playlist-modify-public')
     sp = spotipy.Spotify(auth_manager=auth_manager, auth=access_token)
@@ -61,10 +67,10 @@ def save_playlist_to_spotify(playlist_name, track_uris, access_token):
 
     return f"https://open.spotify.com/embed/playlist/{playlist_id}"
 
-
 def set_playlist_image(playlist_id, image_url, access_token):
     image_data = requests.get(image_url).content
-    encoded_image = base64.b64encode(image_data).decode("utf-8")
+    resized_image_data = resize_and_compress_image(image_data)
+    encoded_image = base64.b64encode(resized_image_data).decode("utf-8")
 
     url = f"https://api.spotify.com/v1/playlists/{playlist_id}/images"
     headers = {
